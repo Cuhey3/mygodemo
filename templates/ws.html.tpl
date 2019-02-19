@@ -141,7 +141,7 @@
     }
 
     function connect() {
-      const websocket = new WebSocket("wss://mygo-uotaneet.c9users.io/echo");
+      const websocket = new WebSocket("wss://" + location.hostname + "/echo");
       wsInstance.set(websocket);
       websocket.addEventListener('open', function(event) {
         console.log('opened');

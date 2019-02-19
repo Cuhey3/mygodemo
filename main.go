@@ -1,7 +1,6 @@
 package main
 
 import (
-	"../mydsl"
 	"fmt"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
@@ -24,7 +23,7 @@ func main() {
 		fmt.Println("unmarshal error:", err)
 	}
 	container := map[string]interface{}{}
-	evaluated, err := mydsl.NewArgument(objInput["main"]).Evaluate(container)
+	evaluated, err := NewArgument(objInput["main"]).Evaluate(container)
 	fmt.Println("container", container)
 	fmt.Println("evaluated", evaluated)
 	fmt.Println("error", err)

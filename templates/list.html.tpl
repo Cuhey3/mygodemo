@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <body>
+  <h3>Executable YAML List</h3>
+  <a href="/ws">Websocket Monitor</a>
   <form method="POST">
   <table border="1">
     <thead>

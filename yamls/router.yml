@@ -216,5 +216,5 @@ main:
 
   - do:
     - http.ListenAndServe
-    - ":8080"
+    - $PORT
     - $router

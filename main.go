@@ -22,7 +22,13 @@ func main() {
 	if yamlError != nil {
 		fmt.Println("unmarshal error:", err)
 	}
-	container := map[string]interface{}{}
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = ":8080"
+	} else {
+		port = ":" + port
+	}
+	container := map[string]interface{}{"PORT": port}
 	evaluated, err := NewArgument(objInput["main"]).Evaluate(container)
 	fmt.Println("container", container)
 	fmt.Println("evaluated", evaluated)

@@ -21,6 +21,18 @@
 			"revision": "4cc2de6207f4128624cbdd16be30f64966c67c08"
 		},
 		{
+			"checksumSHA1": "Pxx+8cipatmpykEo9DpKFqBIOkk=",
+			"path": "github.com/go-chi/chi",
+			"revision": "1a6bb108ccf279c8dac6f9bad857d773b4f9b421",
+			"revisionTime": "2019-01-17T22:35:40Z"
+		},
+		{
+			"checksumSHA1": "YdGi91Ni8IlbfOVEtCu2XHpBwX4=",
+			"path": "github.com/gorilla/websocket",
+			"revision": "7c8e298727d149d7c329b4dec7e94e1932ac5c11",
+			"revisionTime": "2018-12-18T07:24:45Z"
+		},
+		{
 			"checksumSHA1": "MFkrEy77SoBbEtLd3Ros+NZO35w=",
 			"path": "github.com/heroku/x/hmetrics",
 			"revision": "705849e307dd75c91728463dea5bfd08ef493e64",
@@ -48,6 +60,12 @@
 			"revision": "7fcbc72f853b92b5720db4a6b8482be612daef24"
 		},
 		{
+			"checksumSHA1": "+SaI40wzh5K1NNeCI6eS8OFEhsc=",
+			"path": "github.com/mongodb/mongo-go-driver/mongo",
+			"revision": "4934d52c45fe57ea8368aafc3d8b5d28bdb39b4e",
+			"revisionTime": "2019-02-15T12:43:58Z"
+		},
+		{
 			"checksumSHA1": "hKZGpbFuCrkE4s1vxubKK1aFlfI=",
 			"path": "golang.org/x/net/context",
 			"revision": "d9558e5c97f85372afee28cf2b6059d7d3818919"
@@ -57,7 +75,13 @@
 			"comment": "v5.9.1",
 			"path": "gopkg.in/bluesuncorp/validator.v5",
 			"revision": "d627af88ac021317a280d320986282a6dc97549a"
+		},
+		{
+			"checksumSHA1": "QqDq2x8XOU7IoOR98Cx1eiV5QY8=",
+			"path": "gopkg.in/yaml.v2",
+			"revision": "51d6538a90f86fe93ac480b35f37b2be17fef232",
+			"revisionTime": "2018-11-15T11:05:04Z"
 		}
 	],
-	"rootPath": "github.com/heroku/go-getting-started"
+	"rootPath": "mygodemo"
 }

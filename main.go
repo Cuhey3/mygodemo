@@ -1,29 +1,32 @@
 package main
 
 import (
-	"log"
-	"net/http"
+	"../mydsl"
+	"fmt"
+	"gopkg.in/yaml.v2"
+	"io/ioutil"
 	"os"
-
-	"github.com/gin-gonic/gin"
-	_ "github.com/heroku/x/hmetrics/onload"
 )
 
 func main() {
-	port := os.Getenv("PORT")
-
-	if port == "" {
-		log.Fatal("$PORT must be set")
+	f, err := os.Open("yamls/router.yml")
+	if err != nil {
+		fmt.Println("open error:", err)
 	}
-
-	router := gin.New()
-	router.Use(gin.Logger())
-	router.LoadHTMLGlob("templates/*.tmpl.html")
-	router.Static("/static", "static")
-
-	router.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.tmpl.html", nil)
-	})
-
-	router.Run(":" + port)
+	defer f.Close()
+	yamlInput, err := ioutil.ReadAll(f)
+	if err != nil {
+		fmt.Println("read error:", err)
+	}
+	var objInput map[interface{}]interface{}
+	yamlError := yaml.UnmarshalStrict(yamlInput, &objInput)
+	if yamlError != nil {
+		fmt.Println("unmarshal error:", err)
+	}
+	container := map[string]interface{}{}
+	evaluated, err := mydsl.NewArgument(objInput["main"]).Evaluate(container)
+	fmt.Println("container", container)
+	fmt.Println("evaluated", evaluated)
+	fmt.Println("error", err)
+	select {}
 }

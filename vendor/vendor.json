@@ -60,6 +60,12 @@
 			"revision": "7fcbc72f853b92b5720db4a6b8482be612daef24"
 		},
 		{
+			"checksumSHA1": "BE0F4lzfyLQVfj05L1pyLuBN38Q=",
+			"path": "github.com/mongodb/mongo-go-driver/bson",
+			"revision": "4934d52c45fe57ea8368aafc3d8b5d28bdb39b4e",
+			"revisionTime": "2019-02-15T12:43:58Z"
+		},
+		{
 			"checksumSHA1": "+SaI40wzh5K1NNeCI6eS8OFEhsc=",
 			"path": "github.com/mongodb/mongo-go-driver/mongo",
 			"revision": "4934d52c45fe57ea8368aafc3d8b5d28bdb39b4e",

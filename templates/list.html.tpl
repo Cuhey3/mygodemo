@@ -2,7 +2,7 @@
 <html>
 <body>
   <h3>Executable YAML List</h3>
-  <a href="/ws" target="_blank">Websocket Monitor</a>|<a href="/admin/edit">entry</a>
+  <a href="/ws" target="_blank">Websocket Monitor</a> | <a href="/admin/edit">New Entry</a>
   <form method="POST">
   <table border="1">
     <thead>

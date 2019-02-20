@@ -7,17 +7,23 @@ import (
 	"github.com/mongodb/mongo-go-driver/mongo"
 	"log"
 	//	"reflect"
+	"os"
+	"regexp"
 	"time"
 )
 
+var mongoDbnamePattern = regexp.MustCompile(`^mongodb://(.+?):`)
+
 func init() {
-	client, _ := mongo.NewClient("mongodb://heroku_06k6mm29:o3kt6mvjjg92g6gj8v9mqdjp5h@ds037387.mlab.com:37387/heroku_06k6mm29")
+	mongodbUri := os.Getenv("MONGODB_URI")
+	dbname := mongoDbnamePattern.FindStringSubmatch(mongodbUri)[1]
+	client, _ := mongo.NewClient(mongodbUri)
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Hour)
 	client.Connect(ctx)
 
 	DslFunctions["mongoGet"] = func(container map[string]interface{}, args ...Argument) (interface{}, error) {
 		collectionName := args[0].rawArg.(string)
-		collection := client.Database("heroku_06k6mm29").Collection(collectionName)
+		collection := client.Database(dbname).Collection(collectionName)
 		cur, err := collection.Find(ctx, bson.D{})
 		if err != nil {
 			log.Fatal(err)
@@ -44,7 +50,7 @@ func init() {
 		if err != nil {
 			return nil, err
 		}
-		collection := client.Database("heroku_06k6mm29").Collection(collectionName)
+		collection := client.Database(dbname).Collection(collectionName)
 		res, err := collection.InsertOne(ctx, obj)
 		if err != nil {
 			return nil, err
@@ -58,7 +64,7 @@ func init() {
 		if err != nil {
 			return nil, err
 		}
-		collection := client.Database("heroku_06k6mm29").Collection(collectionName)
+		collection := client.Database(dbname).Collection(collectionName)
 		res := collection.FindOneAndReplace(ctx, map[string]interface{}{"_id": (obj.(map[string]interface{}))["_id"]}, obj)
 		return res, nil
 	}

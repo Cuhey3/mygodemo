@@ -3,7 +3,7 @@ main:
       do: chi.NewRouter
 
   # 連想配列のキーがDSL関数名、
-  # 値が引数になる
+  # 連想配列の値が引数になる
 
   - handler:
     - get

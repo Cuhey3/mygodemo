@@ -2,87 +2,8 @@ main:
   - $router:
       do: chi.NewRouter
 
-  - wsHandler:
-    - "/echo"
-    - sequence:
-      - print: $message
-      - when:
-        - is:
-          - $message.open
-          - true
-        - sequence:
-          - $channelListProcessId:
-              format:
-                - "%s%s"
-                - "channelList"
-                - now:
-          - processStart:
-            - $channelListProcessId
-            - subscribe:
-              - "channelList"
-              - sequence:
-                - $data: {}
-                - $data.subscribed: $subscribe
-                - $data.channelName: "channelList"
-                - $data.timestamp:
-                    now:
-                - wsWrite: $data
-              - [conn, message]
-          - $data: {}
-          - $data.subscribed:
-              channelList:
-          - $data.channelName: "channelList"
-          - $data.timestamp:
-              now:
-          - wsWrite: $data
-        - is:
-          - $message.close
-          - true
-        - sequence:
-          - processKill: $message.processId
-          - $data: {}
-          - $data.type: "subscribeEnd"
-          - $data.processId: $message.processId
-          - wsWrite: $data
-        - is:
-          - $message.subscribe
-          - true
-        - sequence:
-          - $processId:
-              format:
-                - "%s%s"
-                - $message.channel
-                - now:
-          - processStart:
-            - $processId
-            - subscribe:
-              - $message.channel
-              - sequence:
-                - $data: {}
-                - $data.subscribed: $subscribe
-                - $data.channelName: $channelName
-                - $data.timestamp:
-                    now:
-                - wsWrite: $data
-              - [conn, message]
-          - $data: {}
-          - $data.type: "subscribeStart"
-          - $data.channelName: $message.channel
-          - $data.timestamp:
-              now:
-          - $data.processId: $processId
-          - wsWrite: $data
-        - is:
-          - $message.publish
-          - true
-        - publish:
-          - $message.channel
-          - $message.json
-        
-    #onclose
-    - sequence:
-      - processKill: $processId
-      - processKill: $channelListProcessId
+  # 連想配列のキーがDSL関数名、
+  # 値が引数になる
 
   - handler:
     - get
@@ -213,6 +134,88 @@ main:
             - yaml
           name: wao
       - redirect: "/admin/list"
+
+  - wsHandler:
+    - "/echo"
+    - sequence:
+      - print: $message
+      - when:
+        - is:
+          - $message.open
+          - true
+        - sequence:
+          - $channelListProcessId:
+              format:
+                - "%s%s"
+                - "channelList"
+                - now:
+          - processStart:
+            - $channelListProcessId
+            - subscribe:
+              - "channelList"
+              - sequence:
+                - $data: {}
+                - $data.subscribed: $subscribe
+                - $data.channelName: "channelList"
+                - $data.timestamp:
+                    now:
+                - wsWrite: $data
+              - [conn, message]
+          - $data: {}
+          - $data.subscribed:
+              channelList:
+          - $data.channelName: "channelList"
+          - $data.timestamp:
+              now:
+          - wsWrite: $data
+        - is:
+          - $message.close
+          - true
+        - sequence:
+          - processKill: $message.processId
+          - $data: {}
+          - $data.type: "subscribeEnd"
+          - $data.processId: $message.processId
+          - wsWrite: $data
+        - is:
+          - $message.subscribe
+          - true
+        - sequence:
+          - $processId:
+              format:
+                - "%s%s"
+                - $message.channel
+                - now:
+          - processStart:
+            - $processId
+            - subscribe:
+              - $message.channel
+              - sequence:
+                - $data: {}
+                - $data.subscribed: $subscribe
+                - $data.channelName: $channelName
+                - $data.timestamp:
+                    now:
+                - wsWrite: $data
+              - [conn, message]
+          - $data: {}
+          - $data.type: "subscribeStart"
+          - $data.channelName: $message.channel
+          - $data.timestamp:
+              now:
+          - $data.processId: $processId
+          - wsWrite: $data
+        - is:
+          - $message.publish
+          - true
+        - publish:
+          - $message.channel
+          - $message.json
+        
+    #onclose
+    - sequence:
+      - processKill: $processId
+      - processKill: $channelListProcessId
 
   - do:
     - http.ListenAndServe

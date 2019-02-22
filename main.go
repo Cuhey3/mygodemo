@@ -33,5 +33,4 @@ func main() {
 	fmt.Println("container", container)
 	fmt.Println("evaluated", evaluated)
 	fmt.Println("error", err)
-	select {}
 }

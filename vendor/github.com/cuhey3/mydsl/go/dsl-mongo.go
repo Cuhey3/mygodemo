@@ -5,6 +5,7 @@ import (
 	_ "fmt"
 	"github.com/mongodb/mongo-go-driver/bson"
 	"github.com/mongodb/mongo-go-driver/mongo"
+	"go.mongodb.org/mongo-driver/mongo/options"
 	"log"
 	//	"reflect"
 	"os"
@@ -17,7 +18,8 @@ var mongoDbnamePattern = regexp.MustCompile(`^mongodb://(.+?):`)
 func init() {
 	mongodbUri := os.Getenv("MONGODB_URI")
 	dbname := mongoDbnamePattern.FindStringSubmatch(mongodbUri)[1]
-	client, _ := mongo.NewClient(mongodbUri)
+	uriOption := options.Client().ApplyURI(mongodbUri)
+	client, _ := mongo.NewClient(uriOption)
 	ctx, _ := context.WithTimeout(context.Background(), 10*time.Hour)
 	client.Connect(ctx)
 

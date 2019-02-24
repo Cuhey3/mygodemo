@@ -3,10 +3,10 @@
 	"ignore": "test",
 	"package": [
 		{
-			"checksumSHA1": "dhOKDt3TeRzVyufUX/XP3h/m6UA=",
+			"checksumSHA1": "3gkCZ5d19SGInKxml5lJXksJoSg=",
 			"path": "github.com/cuhey3/mydsl/go",
-			"revision": "14ea006108809ff61d23abce05eb26f13b9bd162",
-			"revisionTime": "2019-02-24T08:30:25Z"
+			"revision": "b52abbf2b515515f304a47ac90454af364d6612c",
+			"revisionTime": "2019-02-24T12:49:49Z"
 		},
 		{
 			"checksumSHA1": "Pxx+8cipatmpykEo9DpKFqBIOkk=",

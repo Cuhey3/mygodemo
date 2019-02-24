@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/cuhey3/mydsl/go"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"os"
@@ -29,7 +30,7 @@ func main() {
 		port = ":" + port
 	}
 	container := map[string]interface{}{"PORT": port}
-	evaluated, err := NewArgument(objInput["main"]).Evaluate(container)
+	evaluated, err := mydsl.NewArgument(objInput["main"]).Evaluate(container)
 	fmt.Println("container", container)
 	fmt.Println("evaluated", evaluated)
 	fmt.Println("error", err)

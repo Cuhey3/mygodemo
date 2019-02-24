@@ -1,13 +1,12 @@
-package main
+package mydsl
 
 import (
+	"encoding/json"
 	"errors"
 	"fmt"
 	"github.com/go-chi/chi"
 	"github.com/gorilla/websocket"
 	"github.com/mongodb/mongo-go-driver/bson/primitive"
-	//"golang.org/x/net/websocket"
-	"encoding/json"
 	"html/template"
 	_ "io"
 	"log"

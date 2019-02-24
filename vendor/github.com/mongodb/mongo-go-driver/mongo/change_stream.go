@@ -11,17 +11,17 @@ import (
 	"errors"
 	"time"
 
-	"github.com/mongodb/mongo-go-driver/bson"
-	"github.com/mongodb/mongo-go-driver/bson/bsoncodec"
-	"github.com/mongodb/mongo-go-driver/mongo/options"
-	"github.com/mongodb/mongo-go-driver/mongo/readconcern"
-	"github.com/mongodb/mongo-go-driver/mongo/readpref"
-	"github.com/mongodb/mongo-go-driver/x/bsonx"
-	"github.com/mongodb/mongo-go-driver/x/bsonx/bsoncore"
-	"github.com/mongodb/mongo-go-driver/x/mongo/driver"
-	"github.com/mongodb/mongo-go-driver/x/mongo/driver/session"
-	"github.com/mongodb/mongo-go-driver/x/network/command"
-	"github.com/mongodb/mongo-go-driver/x/network/description"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/bsoncodec"
+	"go.mongodb.org/mongo-driver/mongo/options"
+	"go.mongodb.org/mongo-driver/mongo/readconcern"
+	"go.mongodb.org/mongo-driver/mongo/readpref"
+	"go.mongodb.org/mongo-driver/x/bsonx"
+	"go.mongodb.org/mongo-driver/x/bsonx/bsoncore"
+	"go.mongodb.org/mongo-driver/x/mongo/driver"
+	"go.mongodb.org/mongo-driver/x/mongo/driver/session"
+	"go.mongodb.org/mongo-driver/x/network/command"
+	"go.mongodb.org/mongo-driver/x/network/description"
 )
 
 const errorInterrupted int32 = 11601
@@ -104,7 +104,11 @@ func createCmdDocs(csType StreamType, opts *options.ChangeStreamOptions, registr
 		cursorDoc = cursorDoc.Append("batchSize", bsonx.Int32(*opts.BatchSize))
 	}
 	if opts.Collation != nil {
-		optsDoc = optsDoc.Append("collation", bsonx.Document(opts.Collation.ToDocument()))
+		collDoc, err := bsonx.ReadDoc(opts.Collation.ToDocument())
+		if err != nil {
+			return nil, nil, nil, nil, err
+		}
+		optsDoc = optsDoc.Append("collation", bsonx.Document(collDoc))
 	}
 	if opts.FullDocument != nil {
 		pipelineDoc = pipelineDoc.Append("fullDocument", bsonx.String(string(*opts.FullDocument)))
@@ -131,7 +135,7 @@ func createCmdDocs(csType StreamType, opts *options.ChangeStreamOptions, registr
 
 func getSession(ctx context.Context, client *Client) (Session, error) {
 	sess := sessionFromContext(ctx)
-	if err := client.ValidSession(sess); err != nil {
+	if err := client.validSession(sess); err != nil {
 		return nil, err
 	}
 
@@ -173,13 +177,13 @@ func parseOptions(csType StreamType, opts *options.ChangeStreamOptions, registry
 func (cs *ChangeStream) runCommand(ctx context.Context, replaceOptions bool) error {
 	ss, err := cs.client.topology.SelectServer(ctx, cs.db.writeSelector)
 	if err != nil {
-		return err
+		return replaceErrors(err)
 	}
 
 	desc := ss.Description()
 	conn, err := ss.Connection(ctx)
 	if err != nil {
-		return err
+		return replaceErrors(err)
 	}
 	defer conn.Close()
 
@@ -209,13 +213,13 @@ func (cs *ChangeStream) runCommand(ctx context.Context, replaceOptions bool) err
 	rdr, err := readCmd.RoundTrip(ctx, desc, conn)
 	if err != nil {
 		cs.sess.EndSession(ctx)
-		return err
+		return replaceErrors(err)
 	}
 
 	batchCursor, err := driver.NewBatchCursor(bsoncore.Document(rdr), readCmd.Session, readCmd.Clock, ss.Server, cs.getMoreOpts...)
 	if err != nil {
 		cs.sess.EndSession(ctx)
-		return err
+		return replaceErrors(err)
 	}
 	cursor, err := newCursor(batchCursor, cs.registry)
 	if err != nil {
@@ -479,7 +483,7 @@ func (cs *ChangeStream) Decode(out interface{}) error {
 // Err returns the current error.
 func (cs *ChangeStream) Err() error {
 	if cs.err != nil {
-		return cs.err
+		return replaceErrors(cs.err)
 	}
 	if cs.cursor == nil {
 		return nil
@@ -494,7 +498,7 @@ func (cs *ChangeStream) Close(ctx context.Context) error {
 		return nil // cursor is already closed
 	}
 
-	return cs.cursor.Close(ctx)
+	return replaceErrors(cs.cursor.Close(ctx))
 }
 
 // StreamType represents the type of a change stream.

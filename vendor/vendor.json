@@ -318,8 +318,8 @@
 			"checksumSHA1": "lBUiRseyka10o3r/oaQMNlL7sQE=",
 			"origin": "github.com/mongodb/mongo-go-driver/vendor/github.com/xdg/stringprep",
 			"path": "github.com/xdg/stringprep",
-			"revision": "73f8eece6fdcd902c185bf651de50f3828bed5ed",
-			"revisionTime": "2018-07-14T16:05:09Z"
+			"revision": "fcec76a7c147bbcef3aecb66ce318bd4a0b004b4",
+			"revisionTime": "2019-02-22T20:51:11Z"
 		},
 		{
 			"checksumSHA1": "bimceh/SOERPuL2+TJJs0bbllQw=",
@@ -362,6 +362,16 @@
 			"path": "go.mongodb.org/mongo-driver/internal",
 			"revision": "fcec76a7c147bbcef3aecb66ce318bd4a0b004b4",
 			"revisionTime": "2019-02-22T20:51:11Z"
+		},
+		{
+			"checksumSHA1": "dFS6y01KETBr2q7t1WGRxXJlQAs=",
+			"path": "go.mongodb.org/mongo-driver/mongo",
+			"revision": "fcec76a7c147bbcef3aecb66ce318bd4a0b004b4",
+			"revisionTime": "2019-02-22T20:51:11Z"
+		},
+		{
+			"path": "go.mongodb.org/mongo-driver/mongo/bson",
+			"revision": ""
 		},
 		{
 			"checksumSHA1": "9iBuruF+uzRmncZSTj+ssVnwnTI=",
@@ -496,15 +506,22 @@
 			"revisionTime": "2019-02-22T20:51:11Z"
 		},
 		{
+			"path": "go.mongodb.org/mongodb/mongo-go-driver/bson",
+			"revision": ""
+		},
+		{
+			"path": "go.mongodb.org/mongodb/mongo-go-driver/mongo",
+			"revision": ""
+		},
+		{
 			"checksumSHA1": "1MGpGDQqnUoRpv7VEcQrXOBydXE=",
 			"origin": "github.com/mongodb/mongo-go-driver/vendor/golang.org/x/crypto/pbkdf2",
 			"path": "golang.org/x/crypto/pbkdf2",
-			"revision": "ffb98f73852f696ea2bb21a617a5c4b3e067a439",
-			"revisionTime": "2018-06-14T15:19:00Z"
+			"revision": "fcec76a7c147bbcef3aecb66ce318bd4a0b004b4",
+			"revisionTime": "2019-02-22T20:51:11Z"
 		},
 		{
 			"checksumSHA1": "GtamqiJoL7PGHsN454AoffBFMa8=",
-			"origin": "mygodemo/vendor/golang.org/x/net/context",
 			"path": "golang.org/x/net/context",
 			"revision": "3a22650c66bd7f4fb6d1e8072ffd7b75c8a27898",
 			"revisionTime": "2019-02-11T12:35:32Z"
@@ -530,11 +547,11 @@
 			"revisionTime": "2019-02-22T20:51:11Z"
 		},
 		{
-			"checksumSHA1": "vAScJLvb0ucuuclyN9vmJUyWTBA=",
+			"checksumSHA1": "BCNYmf4Ek93G4lk5x3ucNi/lTwA=",
 			"origin": "github.com/mongodb/mongo-go-driver/vendor/golang.org/x/text/unicode/norm",
 			"path": "golang.org/x/text/unicode/norm",
-			"revision": "6c92c7dc7f53607809182301b96e4cc1975143f1",
-			"revisionTime": "2018-12-15T14:04:16Z"
+			"revision": "fcec76a7c147bbcef3aecb66ce318bd4a0b004b4",
+			"revisionTime": "2019-02-22T20:51:11Z"
 		},
 		{
 			"checksumSHA1": "5NDU2YJokde30yQDaobw8oV9Yys=",

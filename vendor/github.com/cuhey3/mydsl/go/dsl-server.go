@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"github.com/go-chi/chi"
 	"github.com/gorilla/websocket"
-	"github.com/mongodb/mongo-go-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"html/template"
 	_ "io"
 	"log"

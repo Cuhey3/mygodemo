@@ -3,6 +3,9 @@
 <body>
   <h3>Executable YAML List</h3>
   <a href="/ws" target="_blank">Websocket Monitor</a> | <a href="/admin/edit">New Entry</a>
+      {{range $item := $.yamls}}
+      {{$item._id | objectIdToHex}}
+      {{end}}
   <form method="POST">
   <table border="1">
     <thead>

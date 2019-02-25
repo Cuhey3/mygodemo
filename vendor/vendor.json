@@ -5,14 +5,14 @@
 		{
 			"checksumSHA1": "3gkCZ5d19SGInKxml5lJXksJoSg=",
 			"path": "github.com/cuhey3/mydsl/go",
-			"revision": "b52abbf2b515515f304a47ac90454af364d6612c",
-			"revisionTime": "2019-02-24T12:49:49Z"
+			"revision": "877ccdd0cb98e638f2d1c515984a0166ee560c62",
+			"revisionTime": "2019-02-25T05:49:14Z"
 		},
 		{
-			"checksumSHA1": "Pxx+8cipatmpykEo9DpKFqBIOkk=",
+			"checksumSHA1": "AQWsGQcvriCrd5yw3TatzSdi1wY=",
 			"path": "github.com/go-chi/chi",
-			"revision": "1a6bb108ccf279c8dac6f9bad857d773b4f9b421",
-			"revisionTime": "2019-01-17T22:35:40Z"
+			"revision": "3ee2f9a37ff10b5e497566fc4c0d5726cad7f50f",
+			"revisionTime": "2019-02-24T18:52:45Z"
 		},
 		{
 			"checksumSHA1": "luu+ud4XYZhlCoNnSAwCJlbh0Bg=",
